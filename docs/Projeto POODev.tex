@@ -56,96 +56,136 @@
 
 
 
-%------------------------------------------------------------------------------------
 
-
-
-
-% Introdução
+% Introdução -----------------------------------------------------------------------
 \chapter{Introdução}
-O objetivo por trás desse sistema é simular uma situação real de desenvolvimento para a disciplina Paradigmas Orientados à Objetos e Desenvolvimento de Software. A ideia do projeto é criar uma agenda escolar para uma rede de escolas, para que alunos, professores e outros profissionais possam visualizar e acompanhar informações como salas, turmas, professor responsável, entre outras funcionalidades que serão melhor demonstradas na sessão de \hyperref[sec:DCU]{Diagramas}. 
+O objetivo por trás desse sistema é simular uma situação real de desenvolvimento para a disciplina Paradigmas Orientados à Objetos e Desenvolvimento de Software. A ideia do projeto é criar uma agenda escolar para uma rede de escolas para que alunos, professores e outros profissionais possam visualizar e acompanhar informações como salas, turmas, docente responsável, entre outras funcionalidades que serão melhor demonstradas na sessão de \hyperref[sec:DCU]{Diagramas}. 
 
 
-O desenvolvimento deste projeto será registrado dentro do github, onde será possível acompanhar a evolução do sistema através do \href{https://github.com/DaviRodrish/Projeto-PooDev---Agenda-Escolar}{Repositório Github}, seguindo o calendário disponível na sessão \hyperref[sec:Calendario]{Calendário}.
+O desenvolvimento deste projeto será registrado dentro da plataforma do Github, onde será possível acompanhar a evolução do sistema no \href{https://github.com/DaviRodrish/Projeto-PooDev---Agenda-Escolar}{Repositório Github}, seguindo o cronograma disponível na sessão \hyperref[sec:cronograma]{Cronograma}.
 
 
-% Objetivos
+
+
+% Objetivos -------------------------------------------------------------------------
 \chapter{Objetivos}
-O sistema tem como foco facilitar a gestão da agenda escolar, otimizando a alocação de salas, evitando conflitos de horários e permitindo que alunos e professores consultem suas grades. Conterá também recursos para os professores lançares as notas dos respectivos alunos. 
+O projeto tem como objetivo central a organização da agenda escolar virtual de uma rede de escolas, integrando informações como alocação de salas,informações sobre disciplinas, professores e horários em uma única plataforma. O sistema também contará com recursos para os professores lançarem notas dos alunos, sendo possivel gerar um relatório onde cada aluno poderá acompanhar suas notas de cada bimestre. O sistema de notas poderá gerar boletins escolares bimestrais e anuais para um melhor acompanhamento das respectivas notas. 
+
+\subsection*{Principais funcionalidades}
+	\paragraph{Automatização da grade horária:}Com o objetivo de reduzir os possíveis erros humanos na alocação de salas e professores, o sistema ficará responsável pela melhor distribuição dentro de cada unidade escolar, auxiliado do coordenador de cada unidade escolar.
+	\paragraph{Oferecer consultas personalizadas:} Cada usuário poderá acessar o sistema com o intuito de visualizar a agenda escolar baseada em filtros como: por aluno, professor, turma ou sala. Será possível acompanhar o cronograma escolar e acessar boletins de alunos, que serão gerados automaticamente após o professor responsável lançar as notas das disciplinas.
+	\paragraph{Acesso disponível em multi plataformas:} O sistema poderá ser acessado por qualquer dispositivo com acesso a intert via navegador web ou mobile.
+
+
+ 
 \section{Público Alvo}
+O público-alvo do sistema é formado por todos os membros que participam do processo acadêmico e administrativo de uma escola, cada um com diferentes níveis de uso e necessidades específicas. Os coordenadores de curso serão um dos principais perfis responsáveis por montar e gerenciar a grade horária, alocar professores e organizar a distribuição de salas. Os professores, utilizarão o sistema para consultar suas disciplinas, horários e salas atribuídas, garantindo maior clareza na sua rotina de trabalho. Já os alunos terão acesso a própria agenda, com a possibilidade de acompanhar as disciplinas e horários de forma prática e acessível. Desse modo, o sistema visa atender de forma integrada os diferentes tipos de usuários,gerando uma maior organização e agilidade.
+
 
 \section{Orçamento}
-% Levantamento de Requisitos
+No orçamento abaixo foram levados em consideração o período de quatro meses de desenvolvimento do sistema, somado com o periodo de uso de um ano seguido.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width = \linewidth]{imagens/orcamento.png}
+	\label{Orçamento}
+	\caption{Orçamento}
+\end{figure}
+
+
+
+% Levantamento de Requisitos----------------------------------------------------------
 \chapter{Levantamento de Requisitos}
+Durante a primeira reunião, foram levantados alguns requisitos que foram listados abaixo, com a possibilidade do sistema de assinatura digital. 
 \section{Requisitos Funcionais}
-\begin{itemize}
+	\begin{itemize}
     \item RF01: Cadastrar professores, alunos, salas e disciplinas e unidades escolares.
-    \item RF02: Consultar grade horária por aluno, professor ou sala.
-    \item RF03: Alocar salas a disciplinas em horários específicos.
-    \item RF04: Impedir conflitos de agendamento.
-    \item RF05: Gerir notas dos alunos, sendo possivel gerar relatorios com situaçao de aprovado ou reprovaado ou registro de notas.
-    \item RF05: Sistema de assinatura digital dos professores e coordenadores.
-\end{itemize}
+    \item RF02: O login deve ser através de email e senha.
+    \item RF03: O sistema deve atribuir diferentes níveis de permissão baseado no tipo de usuário
+    \item RF04: Cada sala deve possuir informações de localização, capacidade e tipo
+    \item RF05: O sistema deve alertar quando houver alguma incompatibilidade
+    \item RF06: Cada usuário deve ter a capacidade de visualizar os relatórios referentes ao seu nível (ex. alunos - boletins e horario escolar; professores - turmas e horários)
+    \item RF07: O sistema deve permitir exportar os relatórios em pdf
+    \item RF08: Consultar grade horária por aluno, professor ou sala.
+    \item RF09: Alocar salas a disciplinas em horários específicos.
+    \item RF10: Impedir conflitos de agendamento.
+    \item RF11: Gerir notas dos alunos, sendo possivel gerar relatorios com situaçao de aprovado ou reprovaado ou registro de notas.
+    \item RF12: Sistema de assinatura digital dos professores e coordenadores.
+	\end{itemize}
 
 \section{Requisitos Não Funcionais}
-\begin{itemize}
+	\begin{itemize}
     \item RNF01: O sistema deve ser responsivo e rápido.
-    \item RNF02: Deve funcionar em navegadores modernos.
-    \item RNF03: Os dados devem ser armazenados de forma segura.
-\end{itemize}
+    \item RNF02: O sistema deve apresentar telas intuitivas com navegação simples.
+    \item RNF03: O sistema deve suportar pelo menos 200 usuários simultâneos.
+    \item RNF04: O sistema deve criptografar senhas dos usuários.
+    \item RNF05: O sistema deve implementar níveis de permissão de acordo com o perfil do usuário.
+    \item RNF06: O sistema deve ser capaz de aumentar a capacidade de usuários e dados sem degradação significativa de desempenho.
+    
+	\end{itemize}
 
-% Casos de Uso
+% Casos de Uso ----------------------------------------------------------------------
+
 \chapter{Diagramas}
 \section{Diagrama de Caso de Uso}
 \label{sec:DCU}
 No diagrama abaixo estão os principais tipos de usuários, com os respectivos elementos que cada um terá acesso dentro do sistema
-\begin{figure}[h!]
-\centering
-\includegraphics[width=.9\textwidth]{imagens/aluno.png}
-\caption{Diagrama de Casos de Uso}
-\label{Diagrama de Casos de Uso}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=.51]{imagens/aluno.png}
+	\caption{Diagrama de Casos de Uso}
+	\label{Diagrama de Casos de Uso}
+\end{figure}
+
+\section{Diagrama UML}
+No diagrama UML, cada uma das classes é projetada com seus respectivos atributos e métodos.
+O segundo coneceito é 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width = \linewidth]{imagens/uml.png}
+	\label{Diagrama UML}
+	\caption{Diagrama UML}
 \end{figure}
 
 
-
-% Arquitetura do Sistema
+% Arquitetura do Sistema -------------------------------------------------------------
 \chapter{Arquitetura do Sistema}
 O aplicativo será desenvolvido utilizando \textbf{React} no front-end e \textbf{Node.js} no back-end, com banco de dados \textbf{PostgreSQL}.  
 A comunicação entre os módulos será feita por meio de \textbf{API REST}.
 
-% Tecnologias Utilizadas
+
+
+% Tecnologias Utilizadas -------------------------------------------------------------
 \chapter{Tecnologias Utilizadas}
 \begin{itemize}
     \item \textbf{Front-end:} React + Tailwind CSS
-    \item \textbf{Back-end:} Node.js + Express
+    \item \textbf{Back-end:} Python + Django
     \item \textbf{Banco de Dados:} PostgreSQL
     \item \textbf{Controle de Versão:} GitHub
 \end{itemize}
 
-% Calendário
-\chapter{Calendário}
-\label{sec:Calendario}
+% Calendário -------------------------------------------------------------------------
+\chapter{Cronograma}
+\label{sec:cronograma}
 
-Para melhor entendimento, o calendário de desenvolvimento foi dividido em dois bimestres, sendo o primeiro focado em backend e integração com banco de dados, e o segundo focado no frontend e nos testes de aplicação. Em ambas etapas, no final de cada semana do mês, uma reunião com cliente irá acontecer, onde será mostrado cada nova parte incluída no sistema.  
+Para melhor entendimento, o cronograma de desenvolvimento foi dividido em dois bimestres, sendo o primeiro focado em backend e integração com banco de dados, e o segundo focado no frontend e nos testes de aplicação. Em ambas etapas, no final de cada semana do mês, uma reunião com cliente irá acontecer, onde será mostrado cada nova parte incluída no sistema.  
 
 \vspace{2cm}
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \centering
 \includegraphics[width = \linewidth]{imagens/Calendario1bi.png}
-\caption{Calendário Primeiro Bimestre de Desenvolvimento}
-\label{Calendário Primeiro Bimestre de Desenvolvimento}
+\caption{Cronograma do Primeiro Bimestre de Desenvolvimento}
+\label{Cronograma do Primeiro Bimestre de Desenvolvimento}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \centering
 \includegraphics[width = \linewidth]{imagens/Calendario2bi.png}
-\caption{Calendário Segundo Bimestre de Desenvolvimento}
-\label{Calendário Segundo Bimestre de Desenvolvimento}
+\caption{Cronograma do Segundo Bimestre de Desenvolvimento}
+\label{Cronograma do Segundo Bimestre de Desenvolvimento}
 \end{figure}
 
-% Conclusão
+% Conclusão --------------------------------------------------------------------------
 \chapter{Conclusão}
-Esta documentação serve como referência para o desenvolvimento e manutenção do aplicativo, garantindo clareza nos requisitos e funcionalidades.
 
 \end{document}
