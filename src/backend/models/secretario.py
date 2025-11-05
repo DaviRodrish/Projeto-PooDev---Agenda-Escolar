@@ -1,5 +1,5 @@
 from db import conectar
-from usuario import Usuario
+from .usuario import Usuario
 
 
 class Secretario(Usuario):

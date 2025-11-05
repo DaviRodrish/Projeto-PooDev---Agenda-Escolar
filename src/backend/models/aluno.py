@@ -1,5 +1,5 @@
+from .usuario import Usuario
 from db import conectar
-from usuario import Usuario
 
 class Aluno(Usuario):
     def __init__(self, nome, email, senha, matricula, curso, idAluno, id_usuario=None):

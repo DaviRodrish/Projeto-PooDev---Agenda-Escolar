@@ -1,4 +1,4 @@
-from usuario import Usuario
+from .usuario import Usuario
 from db import conectar
 
 class Professor(Usuario):
