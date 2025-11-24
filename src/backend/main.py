@@ -35,7 +35,9 @@ def login(usuario: Usuario):
     cursor = conn.cursor()
 
     query = """
-        SELECT nome FROM usuario WHERE email = %s AND senha = %s
+        SELECT nome, tipo 
+        FROM usuario 
+        WHERE email = %s AND senha = %s
     """
     cursor.execute(query, (usuario.email, usuario.senha))
     result = cursor.fetchone()
@@ -43,7 +45,12 @@ def login(usuario: Usuario):
     if not result:
         raise HTTPException(status_code=401, detail="Credenciais inválidas")
 
-    return {"mensagem": f"Bem-vindo, {result[0]}!"}
+    nome, tipo = result
+
+    return {
+        "mensagem": f"Bem-vindo, {nome}!",
+        "tipo": tipo
+    }
 
 
 @app.post("/cadastrar")

@@ -20,7 +20,7 @@ def verificar_usuario(email, senha):
         return None
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT id, senha, tipo, nome FROM usuarios WHERE email = %s", (email,))
+        cursor.execute("SELECT id, senha, tipo, nome FROM usuario WHERE email = %s", (email,))
         user = cursor.fetchone()
         if user and bcrypt.checkpw(senha.encode('utf-8'), user[1].encode('utf-8')):  # Verifica hash
             return {"id": user[0], "tipo": user[2], "nome": user[3]}
