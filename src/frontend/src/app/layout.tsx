@@ -12,10 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Rede Escolar ",
+export const metadata = {
+  title: "Rede Escolar",
   description: "Sua Rede de Escola mais completa!",
+  icons: {
+    icon: "/redeEscolar.ico",
+  },
 };
+
 
 export default function RootLayout({
   children,

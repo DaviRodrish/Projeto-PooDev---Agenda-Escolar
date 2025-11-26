@@ -1,0 +1,236 @@
+\documentclass[12pt,a4paper]{report}
+
+% ------------------------------
+% Pacotes básicos
+% ------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+
+% Layout
+\geometry{margin=2.5cm}
+\onehalfspacing
+
+% Configuração dos links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ------------------------------
+% CAPA
+% ------------------------------
+\begin{titlepage}
+    \centering
+    {\Large \textbf{Relatório Final do Sistema Escolar}}\\[2cm]
+
+    {\large Desenvolvido por: \textbf{Davi}}\\[0.5cm]
+    {\large Disciplina: Projeto de Software / Engenharia de Software}\\[0.5cm]
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ------------------------------
+\chapter{Arquitetura Final do Sistema}
+% ------------------------------
+
+\section{Visão Geral da Arquitetura}
+Descreva como o sistema foi arquitetado: camadas, comunicação, tecnologias (ex.: React, Node, PostgreSQL).
+
+\section{Componentes Principais}
+Explique brevemente o papel de cada componente.
+
+\section{Diagrama da Arquitetura}
+
+\begin{figure}[H]
+    \centering
+    % Substituir por sua imagem
+    %\includegraphics[width=0.9\textwidth]{}
+    \caption{Arquitetura final do sistema.}
+\end{figure}
+
+
+% ------------------------------
+\chapter{Diagrama de Classes Atualizado}
+% ------------------------------
+
+\section{Descrição Geral}
+Explique como as classes foram organizadas e utilizadas no sistema.
+
+\section{Diagrama de Classes}
+
+\begin{figure}[H]
+    \centering
+    % Substituir pelo diagrama UML final
+    %\includegraphics[width=0.9\textwidth]{diagrama_classes_atualizado.png}
+    \caption{Diagrama de classes atualizado do sistema.}
+\end{figure}
+
+\section{Descrição das Classes}
+Liste as principais classes, responsabilidades e relações.
+
+Exemplo:
+
+\begin{itemize}
+    \item \textbf{Usuario}: controla autenticação e perfil.
+    \item \textbf{Aluno}: armazena dados acadêmicos.
+    \item \textbf{Boletim}: gera estrutura de notas e frequências.
+\end{itemize}
+
+
+% ------------------------------
+\chapter{Principais Padrões e Técnicas Utilizadas}
+% ------------------------------
+
+\section{Padrões de Projeto}
+Descreva quais padrões foram aplicados e onde. Exemplos comuns:
+
+\begin{itemize}
+    \item MVC / MVVM
+    \item Repository
+    \item Singleton
+    \item Factory
+\end{itemize}
+
+\section{Técnicas Utilizadas}
+Documente:
+
+\begin{itemize}
+    \item Controle de estado (Redux, Context API, etc.)
+    \item Componentização em React
+    \item Validação de formulários
+    \item Autenticação baseada em tokens
+\end{itemize}
+
+\section{Justificativas das Escolhas}
+Explique o porquê dos padrões/técnicas.
+
+
+% ------------------------------
+\chapter{Cronograma Efetivamente Cumprido}
+% ------------------------------
+
+\section{Tabela de Cronograma}
+
+\begin{longtable}{|m{4cm}|m{6cm}|m{4cm}|}
+\hline
+\textbf{Atividade} & \textbf{Descrição} & \textbf{Entrega Real} \\ \hline
+
+Planejamento & Definição do escopo e levantamento de requisitos. & 05/09/2025 \\ \hline
+
+Desenvolvimento da Arquitetura & Criação da arquitetura inicial e do banco. & 12/09/2025 \\ \hline
+
+Implementação do Frontend & Telas básicas e navegação. & 25/09/2025 \\ \hline
+
+Implementação do Backend & Endpoints principais e banco. & 10/10/2025 \\ \hline
+
+Integração Geral & Front + Back + DB. & 20/10/2025 \\ \hline
+
+Testes e Refino Final & Correções e otimizações. & 30/10/2025 \\ \hline
+
+\caption{Cronograma com as entregas efetivamente cumpridas.}
+\end{longtable}
+
+
+% ------------------------------
+\chapter{Descrição de Desafios Encontrados}
+% ------------------------------
+
+Liste aqui os maiores desafios enfrentados durante o desenvolvimento.
+
+Exemplos para preencher:
+
+\begin{itemize}
+    \item Integração entre as camadas de comunicação.
+    \item Dificuldades com autenticação multiusuário.
+    \item Inconsistências iniciais no banco de dados.
+    \item Ajustes de responsividade no frontend.
+    \item Problemas de performance no carregamento de dados.
+\end{itemize}
+
+Explique como cada desafio foi resolvido.
+
+
+% ------------------------------
+\chapter{Instruções para Execução do Sistema}
+% ------------------------------
+
+\section{Requisitos Necessários}
+Exemplo:
+
+\begin{itemize}
+    \item Node.js 18+
+    \item PostgreSQL 15+
+    \item NPM ou Yarn
+\end{itemize}
+
+\section{Passo a Passo para Executar}
+
+\subsection{1. Clonar o Projeto}
+\begin{verbatim}
+git clone https://github.com/seu-repositorio/sistema-escolar.git
+\end{verbatim}
+
+\subsection{2. Configurar Variáveis de Ambiente}
+Crie um arquivo `.env` com:
+
+\begin{verbatim}
+DATABASE_URL="postgres://usuario:senha@localhost:5432/escola"
+JWT_SECRET="chave_secreta"
+\end{verbatim}
+
+\subsection{3. Instalar Dependências}
+
+Backend:
+\begin{verbatim}
+cd backend
+npm install
+\end{verbatim}
+
+Frontend:
+\begin{verbatim}
+cd frontend
+npm install
+\end{verbatim}
+
+\subsection{4. Rodar o Sistema}
+
+Backend:
+\begin{verbatim}
+npm run dev
+\end{verbatim}
+
+Frontend:
+\begin{verbatim}
+npm run dev
+\end{verbatim}
+
+\section{Acesso ao Sistema}
+Abra no navegador:
+
+\begin{verbatim}
+http://localhost:3000
+\end{verbatim}
+
+% ------------------------------
+\chapter*{Conclusão}
+\addcontentsline{toc}{chapter}{Conclusão}
+
+O relatório apresentou a versão final do sistema, sua arquitetura, técnicas utilizadas, desafios e instruções para execução. O sistema está concluído e pronto para análise e uso.
+
+\end{document}
