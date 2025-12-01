@@ -2,24 +2,13 @@
 \contentsline {chapter}{\numberline {1}Arquitetura Final do Sistema}{2}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Visão Geral da Arquitetura}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Componentes Principais}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Diagrama da Arquitetura}{2}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Diagrama de Classes Atualizado}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Descrição Geral}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Diagrama de Classes}{3}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Descrição das Classes}{3}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Principais Padrões e Técnicas Utilizadas}{4}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Padrões de Projeto}{4}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Técnicas Utilizadas}{4}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Justificativas das Escolhas}{4}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Cronograma Efetivamente Cumprido}{5}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Tabela de Cronograma}{5}{section.4.1}%
-\contentsline {chapter}{\numberline {5}Descrição de Desafios Encontrados}{6}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Instruções para Execução do Sistema}{7}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Requisitos Necessários}{7}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Passo a Passo para Executar}{7}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}1. Clonar o Projeto}{7}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}2. Configurar Variáveis de Ambiente}{7}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}3. Instalar Dependências}{7}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}4. Rodar o Sistema}{8}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Acesso ao Sistema}{8}{section.6.3}%
-\contentsline {chapter}{Conclusão}{9}{chapter*.4}%
+\contentsline {subsection}{\numberline {1.2.1}Frontend}{2}{subsection.1.2.1}%
+\contentsline {paragraph}{Principais Páginas e Módulos}{2}{section*.2}%
+\contentsline {subsection}{\numberline {1.2.2}Backend}{2}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Banco de dados}{3}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Considerações}{3}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Cronograma Efetivamente Cumprido}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Tabela de Cronograma}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Resumo Mensal}{5}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Descrição de Desafios Encontrados}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Conclusão}{8}{chapter.4}%

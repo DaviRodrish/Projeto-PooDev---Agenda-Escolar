@@ -3,6 +3,8 @@
 % ------------------------------
 % Pacotes básicos
 % ------------------------------
+
+\usepackage{mathptmx}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
@@ -32,205 +34,111 @@
 % CAPA
 % ------------------------------
 \begin{titlepage}
-    \centering
-    {\Large \textbf{Relatório Final do Sistema Escolar}}\\[2cm]
+    \begin{center}
+        
+        \includegraphics[scale=0.2]{imagens/uenf1.png}\\[1cm]
+       
+        {\large CENTRO DE CIÊNCIAS E TECNOLOGIAS}\\
+        {\large LABORATÓRIO DE CIÊNCIAS MATEMÁTICAS}\\[4cm]
 
-    {\large Desenvolvido por: \textbf{Davi}}\\[0.5cm]
-    {\large Disciplina: Projeto de Software / Engenharia de Software}\\[0.5cm]
+        {\large \textbf{Davi Rodrigues Soares Machado}}\\[4cm]
 
-    \vfill
-    {\large \today}
+        {\large \textbf{Relatório: \\ Sistema de Rede Escolar}}\\[4cm]
+
+        Campos dos Goytacazes - RJ\\
+        \today
+    \end{center}
 \end{titlepage}
+
 
 \tableofcontents
 \newpage
+
 
 % ------------------------------
 \chapter{Arquitetura Final do Sistema}
 % ------------------------------
 
 \section{Visão Geral da Arquitetura}
-Descreva como o sistema foi arquitetado: camadas, comunicação, tecnologias (ex.: React, Node, PostgreSQL).
+A arquitetura final do sistema foi planejada seguindo o modelo em camadas, integrando a interface desenvolvida com React/Next.js com um backend estruturado e conectado a um banco de dados PostgreSQL.
+
+O objetivo principal era permitir o gerenciamento das informações escolares de alunos, professores e demais usuários dentro da Rede Escolar.
+
+A comunicação entre backend e frontend foi realizada usando API REST.
 
 \section{Componentes Principais}
-Explique brevemente o papel de cada componente.
+\subsection{Frontend}
+O principal componente do frontend é o next, que serviu para renderizar e otimizar as rotas entre as pages. Já o react, permitiu a criação de componentes reutilizáveis do sistema
+\paragraph{Principais Páginas e Módulos}
+A ideia principal consistia em criar uma home page central, com informações da rede de escolas, e uma pagina destinada a cada tipo de usuário (alunos, professores e secretários). 
 
-\section{Diagrama da Arquitetura}
+\subsection{Backend}
+O backend foi desenvolvido com Python e FastAPI, sendo o local responsável pela parte lógica do sistema, o tratamento de autenticação de usuário e a consistencia dos dados que iriam para o banco de dados.
 
-\begin{figure}[H]
-    \centering
-    % Substituir por sua imagem
-    %\includegraphics[width=0.9\textwidth]{}
-    \caption{Arquitetura final do sistema.}
-\end{figure}
+As requisições vindas dos usuários pelo frontend eram processadas e direcionadas de volta através de respostas em JSON
 
+\subsection{Banco de dados}
+O modelo inicial do banco de dados consistia em uma classe geradora Usuário, e suas subclasses como Alunos, Professores e Secretários. No decorrer do projeto, foi visto a necessidade de criar tabelas direcionadas as notas dos alunos.
 
-% ------------------------------
-\chapter{Diagrama de Classes Atualizado}
-% ------------------------------
-
-\section{Descrição Geral}
-Explique como as classes foram organizadas e utilizadas no sistema.
-
-\section{Diagrama de Classes}
-
-\begin{figure}[H]
-    \centering
-    % Substituir pelo diagrama UML final
-    %\includegraphics[width=0.9\textwidth]{diagrama_classes_atualizado.png}
-    \caption{Diagrama de classes atualizado do sistema.}
-\end{figure}
-
-\section{Descrição das Classes}
-Liste as principais classes, responsabilidades e relações.
-
-Exemplo:
-
-\begin{itemize}
-    \item \textbf{Usuario}: controla autenticação e perfil.
-    \item \textbf{Aluno}: armazena dados acadêmicos.
-    \item \textbf{Boletim}: gera estrutura de notas e frequências.
-\end{itemize}
-
-
-% ------------------------------
-\chapter{Principais Padrões e Técnicas Utilizadas}
-% ------------------------------
-
-\section{Padrões de Projeto}
-Descreva quais padrões foram aplicados e onde. Exemplos comuns:
-
-\begin{itemize}
-    \item MVC / MVVM
-    \item Repository
-    \item Singleton
-    \item Factory
-\end{itemize}
-
-\section{Técnicas Utilizadas}
-Documente:
-
-\begin{itemize}
-    \item Controle de estado (Redux, Context API, etc.)
-    \item Componentização em React
-    \item Validação de formulários
-    \item Autenticação baseada em tokens
-\end{itemize}
-
-\section{Justificativas das Escolhas}
-Explique o porquê dos padrões/técnicas.
-
+\section{Considerações}
+O andamento do desenvolvimento sofreu mudanças, que serão abordadas na Sessão Resumo Mensal, sendo comparado as atividades feitas com as atividades propostas.
 
 % ------------------------------
 \chapter{Cronograma Efetivamente Cumprido}
 % ------------------------------
 
 \section{Tabela de Cronograma}
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{imagens/Calendario1bi.png}
+\caption{Cronograma do Primeiro Bimestre de Desenvolvimento}
+\label{Cronograma do Primeiro Bimestre de Desenvolvimento}
+\end{figure}
 
-\begin{longtable}{|m{4cm}|m{6cm}|m{4cm}|}
-\hline
-\textbf{Atividade} & \textbf{Descrição} & \textbf{Entrega Real} \\ \hline
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{imagens/Calendario2bi.png}
+\caption{Cronograma do Segundo Bimestre de Desenvolvimento}
+\label{Cronograma do Segundo Bimestre de Desenvolvimento}
+\end{figure}
 
-Planejamento & Definição do escopo e levantamento de requisitos. & 05/09/2025 \\ \hline
+\section{Resumo Mensal}
+Toda a comparação vai se seguir utilizando do github, onde foi registrado cada uma das alterações.
 
-Desenvolvimento da Arquitetura & Criação da arquitetura inicial e do banco. & 12/09/2025 \\ \hline
+\begin{itemize}
+\item \textbf{SETEMBRO:} No mês de Setembro, o principal foco era elucidar o que seria em si o sistema, quais as funcionalidades e conferir quais os requisitos que seriam essenciais. Na primeira semana, tudo ocorreu como o planejado no cronograma. Houve a primeira reunião e a apresentação do que consistia o projeto, com orçamento e tecnologias que seriam utilizadas. Nesse primeiro mês, o foco principal aconteceu na documentação que precisou passar por mudanças, deixando a quinzena final do mês para a prototipagem do que seriam as classes principais do sistema.
 
-Implementação do Frontend & Telas básicas e navegação. & 25/09/2025 \\ \hline
+\item \textbf{OUTUBRO:} O Mês de outubro, segundo o cronograma seria para a implementação do backend e ao final, ter mais uma reunião para retificar o andamento do projeto. No decorrer do mês, houveram problemas pessoais que fizeram com que o desenvolvimento do backend fosse drasticamente afetado, atrasando a entrega do mesmo em 3 semanas. 
 
-Implementação do Backend & Endpoints principais e banco. & 10/10/2025 \\ \hline
+Tendo uma mudança significativa somente ao fim do mês, onde o início do frontend começou a ser desenvolvido, na esperança de retomar ao cronograma,algumas dificuldades foram aparecendo. O resultado por trás do atraso no backend foi postergar o desenvolvimento dos principais métodos e modulos das classes. A decisão de migrar pro frontend e começar um rascunho do que seria o projeto final fez com que o desenvolvimento dos módulos fosse deixado em segundo plano. Por fim, a reunião que deveria acontecer ao final do mês não aconteceu, deixando ainda mais o desenvolvimento do sistema, distante do requerido pelo cliente.
 
-Integração Geral & Front + Back + DB. & 20/10/2025 \\ \hline
+\item \textbf{NOVEMBRO:}Novembro tinha como objetivo terminar o frontend e começar os testes funcionais do sistema, na ultima semana. Novamente, o desenvolvimento foi prejudicado, dessa vez em vista das provas e de entregas de trabalhos, principalmente matérias com conteúdos pesados, como pesquisa operacional e compiladores. No decorrer do mes de novembro, integramos o render no projeto, ferramenta que estabiliza e conecta a comunicação entre back e frontend.
 
-Testes e Refino Final & Correções e otimizações. & 30/10/2025 \\ \hline
+Os principais commits desse mes foram voltados para a parte de credenciais de usuários, mas a comunicação entre o banco de dados estava sendo quebrada dado ao mau uso da API de comunicação. A alternativa foi voltar a comunicação em um ambiente interno virtual, onde atualmente acontece a validação das credenciais dos usuários.
 
-\caption{Cronograma com as entregas efetivamente cumpridas.}
-\end{longtable}
+A reunião prevista com o cliente não aconteceu da forma planejada, sendo demonstrado o estado atual do sistema somente no dia 26 de novembro, onde pude ver que colocar as funções e módulos do sistema em segundo plano, deixasse o sistema somente no esboço, dado que o foco principal foi colocado de lado. As Páginas dos usuários foram visualmente feitas, mas como os módulos nao estavam implementados, ficaram sem funcionalidades.
 
+\item \textbf{DEZEMBRO:} Dezembro seria o mês em que o projeto seria entregue completo, sendo o dia 03 o dia final da apresentação do sistema. Como dito anteriormente, o sistema ainda não esta finalizado e depende dessa ultima semana, que seria antes para correção de bugs e testes de uso, mudando para novamente os primórdios do backend: os módulos e funções de cada classe. Essencialmente o sistema é oco, visualmente completo mas internamente vazio. A pretenção é fazer o máximo proposto ate o dia final, para que as expectativas do cliente sejam minimamente supridas.
+ 
+\end{itemize}
 
 % ------------------------------
 \chapter{Descrição de Desafios Encontrados}
-% ------------------------------
-
-Liste aqui os maiores desafios enfrentados durante o desenvolvimento.
-
-Exemplos para preencher:
 
 \begin{itemize}
-    \item Integração entre as camadas de comunicação.
-    \item Dificuldades com autenticação multiusuário.
-    \item Inconsistências iniciais no banco de dados.
-    \item Ajustes de responsividade no frontend.
-    \item Problemas de performance no carregamento de dados.
+    \item Integração entre Backend,Frontend e Banco de dados: Acredito que pela falta de experiência, uma das maiores dificuldades foi a comunicação entre esses 3 componentes. A solução foi pesquisar ferramentas que permitiriam facilitar essa comunicação. Primariamente, escolhi usar o render mas não tive total familiaridade, então optei por fazer um ambiente virtual usando python, que através do uvicorn, consigo gerar uma comunicação local sem muitos problemas.
+    \item Dificuldades com tempo de desenvolvimento: Sem dúvidas, o tempo foi o maior fator dificultador. O cronograma foi feito baseado nas semanas, levando em consideração entregas e provas de outras disciplinas, mas mesmo com isso, não foi como previsto. O acúmulo de tarefas que foram postergadas acabou impedindo que o projeto andasse da forma com que foi previsto. O resultado foi o não cumprimento do cronograma e o atrado do desenvolvimento dos módulos.
+    \item Conhecimento prévio: A construção do sistema não levava em conta o desconhecimento ou a falta de experiência em tecnolgias como o github, a programação orientada à objetos, que além de precisar revisar os conceitos e usos, nunca tinha sido feita por mim na linguagem python. Acredito que boas horas foram dedicadas ao estudo e preparo antes mesmo do desenvolvimento, para a familiarização dessas tecnologias.
+    \item Má elaboração do banco de dados: Ao criar o banco de dados, percebi que o diagrama feito não levava em consideração o armazenamento de dados que seriam usados dentro das funções e módulos, como notas dos alunos e como isso seria projetado. Ainda estamos vendo a viabilidade da implementação no sistema e das alterações nos diagramas.
 \end{itemize}
-
-Explique como cada desafio foi resolvido.
-
-
 % ------------------------------
-\chapter{Instruções para Execução do Sistema}
-% ------------------------------
+\chapter{Conclusão}
+O desenvolvimento, mesmo que parcial, do sistema foi e tem sido um bom desafio. Unir o conhecimento de várias disciplinas da faculdade, que por vezes não temos o tempo de por em prática cria uma bagagem que futuramente acredito ser essencial para o desenvolvimento de futuros sistemas. 
 
-\section{Requisitos Necessários}
-Exemplo:
+Em grande parte da faculdade vemos o desenvolvimento dos sistemas baseado em metologias pouco práticas no dia a dia, como o desenvolvimento cascata. Ná prática, essa metodologia por mais segura que seja, impede que o desenvolvimento dinâmico aconteça, tornando tarefas que poderiam ser feitas em horas, levarem dias, dado a necessidade da espera da etapa anterior ter sido concluída.
 
-\begin{itemize}
-    \item Node.js 18+
-    \item PostgreSQL 15+
-    \item NPM ou Yarn
-\end{itemize}
+O estudo dos requisitos de sistema foi crucial para que a ideia que o cliente tinha fosse estruturada da forma mais real, colocando ambos os lados (cliente e desenvolvedor) em consentimento. 
 
-\section{Passo a Passo para Executar}
-
-\subsection{1. Clonar o Projeto}
-\begin{verbatim}
-git clone https://github.com/seu-repositorio/sistema-escolar.git
-\end{verbatim}
-
-\subsection{2. Configurar Variáveis de Ambiente}
-Crie um arquivo `.env` com:
-
-\begin{verbatim}
-DATABASE_URL="postgres://usuario:senha@localhost:5432/escola"
-JWT_SECRET="chave_secreta"
-\end{verbatim}
-
-\subsection{3. Instalar Dependências}
-
-Backend:
-\begin{verbatim}
-cd backend
-npm install
-\end{verbatim}
-
-Frontend:
-\begin{verbatim}
-cd frontend
-npm install
-\end{verbatim}
-
-\subsection{4. Rodar o Sistema}
-
-Backend:
-\begin{verbatim}
-npm run dev
-\end{verbatim}
-
-Frontend:
-\begin{verbatim}
-npm run dev
-\end{verbatim}
-
-\section{Acesso ao Sistema}
-Abra no navegador:
-
-\begin{verbatim}
-http://localhost:3000
-\end{verbatim}
-
-% ------------------------------
-\chapter*{Conclusão}
-\addcontentsline{toc}{chapter}{Conclusão}
-
-O relatório apresentou a versão final do sistema, sua arquitetura, técnicas utilizadas, desafios e instruções para execução. O sistema está concluído e pronto para análise e uso.
+Por fim,acredito que essa tenha sido uma experiência marcante na universidade, definitivamente a complexidade de um sistema vai muito alem do que imaginamos, e a necessidade de novos componentes vem de acordo com a demanda do cliente, mostrando a importancia que a comunicação entre ambos os lados tem para o desenvolvimento. 
 
 \end{document}

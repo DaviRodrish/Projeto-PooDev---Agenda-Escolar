@@ -1,79 +1,40 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from db import conectar, verificar_usuario
+from models.professor import router as professor_router
 from pydantic import BaseModel
-from db import conectar
-from models.aluno import Aluno
-from models.escola import Escola
-from models.professor import Professor
-from models.secretario import Secretario
-from models.usuario import Usuario
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # ou especificar o domínio do Next.js
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class Usuario(BaseModel):
-    email: str
-    senha: str
+# ROTAS DO PROFESSOR
+app.include_router(professor_router)
 
-class NovoUsuario(BaseModel):
-    tipo: str
-    nome: str
+# ======================
+# LOGIN
+# ======================
+
+class UsuarioLogin(BaseModel):
     email: str
     senha: str
 
 
 @app.post("/login")
-def login(usuario: Usuario):
-    conn = conectar()
-    cursor = conn.cursor()
+def login(usuario: UsuarioLogin):
 
-    query = """
-        SELECT nome, tipo 
-        FROM usuario 
-        WHERE email = %s AND senha = %s
-    """
-    cursor.execute(query, (usuario.email, usuario.senha))
-    result = cursor.fetchone()
+    user = verificar_usuario(usuario.email, usuario.senha)
 
-    if not result:
+    if not user:
         raise HTTPException(status_code=401, detail="Credenciais inválidas")
 
-    nome, tipo = result
-
     return {
-        "mensagem": f"Bem-vindo, {nome}!",
-        "tipo": tipo
+        "mensagem": f"Bem-vindo, {user['nome']}!",
+        "tipo": user["tipo"]
     }
-
-
-@app.post("/cadastrar")
-def cadastrar(novo: NovoUsuario):
-    conn = conectar()
-    cursor = conn.cursor()
-
-    if novo.tipo not in ["aluno", "professor"]:
-        raise HTTPException(status_code=400, detail="Tipo inválido")
-
-    try:
-        query = f"""
-            INSERT INTO {novo.tipo} (nome, email, senha)
-            VALUES (%s, %s, %s)
-        """
-        cursor.execute(query, (novo.nome, novo.email, novo.senha))
-        conn.commit()
-        return {"mensagem": f"{novo.tipo.capitalize()} cadastrado com sucesso!"}
-
-    except Exception as e:
-        conn.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-
-    finally:
-        cursor.close()
-        conn.close()

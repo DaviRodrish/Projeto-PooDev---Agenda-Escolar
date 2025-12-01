@@ -1,75 +1,55 @@
-from .usuario import Usuario
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
 from db import conectar
 
-class Professor(Usuario):
-    def __init__(self, nome, email, senha, idProfessor):
-        super().__init__(nome, email, senha)
-        self.idProfessor = idProfessor
+router = APIRouter(prefix="/professor")
 
-    
-    def mostraInfos(self):
-        super().mostraInfos()
-        print(f"ID de Professor: {self.idProfessor}")
+class NotaEntrada(BaseModel):
+    matricula: str
+    disciplina: str
+    nota: float
 
-    
-    def lancaNota(self, aluno, disciplina, nota):
-        aluno.boletim[disciplina] = nota
-        print(f"Nota {nota} lançada para {aluno.nome} em {disciplina}.")
 
-    
-    def editaNota(self, aluno, disciplina, novaNota):
-        if disciplina in aluno.boletim:
-            aluno.boletim[disciplina] = novaNota
-            print(f"Nota de {aluno.nome} em {disciplina} alterada para {novaNota}.")
-        else:
-            print(f"{aluno.nome} não possui nota registrada em {disciplina}.")
+@router.post("/lancar-nota")
+def lancar_nota(dados: NotaEntrada):
 
-    
-    def salvar_no_banco(self):
-        conn = conectar()
-        if not conn:
-            print("Falha na conexão com o banco")
-            return
+    conn = conectar()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Erro ao conectar ao banco de dados.")
 
-        try:
-            cur = conn.cursor()
-            cur.execute("""
-                INSERT INTO usuarios (nome, email, senha, tipo)
-                VALUES (%s, %s, %s, 'professor') RETURNING id;
-            """, (self.nome, self.email, self.senha))
-            id_usuario = cur.fetchone()[0]
+    cur = conn.cursor()
 
-            cur.execute("""
-                INSERT INTO professores (id_usuario, idProfessor)
-                VALUES (%s, %s);
-            """, (id_usuario, self.idProfessor))
+    try:
+        # Buscar aluno pela matrícula
+        cur.execute("SELECT id FROM alunos WHERE matricula = %s", (dados.matricula,))
+        aluno = cur.fetchone()
+        if not aluno:
+            raise HTTPException(status_code=404, detail="Aluno não encontrado.")
 
-            conn.commit()
-            print(f"Professor {self.nome} salvo com sucesso!")
+        aluno_id = aluno[0]
 
-        except Exception as e:
-            conn.rollback()
-            print("Erro ao salvar professor:", e)
-        finally:
-            cur.close()
-            conn.close()
+        # Buscar disciplina pelo nome
+        cur.execute("SELECT id FROM disciplinas WHERE nome = %s", (dados.disciplina,))
+        disc = cur.fetchone()
+        if not disc:
+            raise HTTPException(status_code=404, detail="Disciplina não encontrada.")
 
-    
-    @staticmethod
-    def listar_todos():
-        conn = conectar()
-        if not conn:
-            return []
+        disciplina_id = disc[0]
 
-        try:
-            cur = conn.cursor()
-            cur.execute("""
-                SELECT u.nome, u.email, p.idProfessor
-                FROM professores p
-                JOIN usuarios u ON u.id = p.id_usuario;
-            """)
-            return cur.fetchall()
-        finally:
-            cur.close()
-            conn.close()
+        # Inserir nota no banco
+        cur.execute("""
+            INSERT INTO notas (aluno_id, disciplina_id, nota, data_lancamento)
+            VALUES (%s, %s, %s, NOW())
+        """, (aluno_id, disciplina_id, dados.nota))
 
+        conn.commit()
+
+        return {"mensagem": "Nota lançada com sucesso!"}
+
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cur.close()
+        conn.close()
