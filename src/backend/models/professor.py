@@ -8,11 +8,10 @@ class NotaEntrada(BaseModel):
     matricula: str
     disciplina: str
     nota: float
-
+    tipo_avaliacao: str  # Novo campo obrigatório para diferenciar notas
 
 @router.post("/lancar-nota")
 def lancar_nota(dados: NotaEntrada):
-
     conn = conectar()
     if conn is None:
         raise HTTPException(status_code=500, detail="Erro ao conectar ao banco de dados.")
@@ -36,11 +35,11 @@ def lancar_nota(dados: NotaEntrada):
 
         disciplina_id = disc[0]
 
-        # Inserir nota no banco
+        # Inserir nota no banco (agora com tipo_avaliacao)
         cur.execute("""
-            INSERT INTO notas (matricula, disciplina_id, nota, data_lancamento)
-            VALUES (%s, %s, %s, NOW())
-        """, (dados.matricula, disciplina_id, dados.nota))
+            INSERT INTO notas (matricula, disciplina_id, nota, data_lancamento, tipo_avaliacao)
+            VALUES (%s, %s, %s, NOW(), %s)
+        """, (dados.matricula, disciplina_id, dados.nota, dados.tipo_avaliacao))
 
         conn.commit()
 

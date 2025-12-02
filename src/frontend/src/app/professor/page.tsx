@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaUser, FaBookOpen, FaClipboardCheck, FaSignOutAlt, FaCheckCircle } from "react-icons/fa"; // Adicionando ícones para melhorar a estética
 
 type NotaLancada = {
   matricula: string;
   disciplina: string;
   nota: number;
+  tipo_avaliacao: string;
 };
 
 export default function ProfessorPage() {
@@ -20,6 +22,7 @@ export default function ProfessorPage() {
   const [matricula, setMatricula] = useState<string>("");
   const [disciplina, setDisciplina] = useState<string>("");
   const [nota, setNota] = useState<string>("");
+  const [tipoAvaliacao, setTipoAvaliacao] = useState<string>("");
   const [notasLancadas, setNotasLancadas] = useState<NotaLancada[]>([]);
 
   const handleSubmit = async () => {
@@ -30,7 +33,7 @@ export default function ProfessorPage() {
       return;
     }
 
-    if (!matricula.trim() || !disciplina.trim()) {
+    if (!matricula.trim() || !disciplina.trim() || !tipoAvaliacao.trim()) {
       alert("Preencha todos os campos.");
       return;
     }
@@ -46,27 +49,26 @@ export default function ProfessorPage() {
           matricula,
           disciplina,
           nota: notaNum,
+          tipo_avaliacao: tipoAvaliacao,
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        // se sua API devolve { erro: "..." } ou status != 2xx
         alert("Erro: " + (data.erro ?? JSON.stringify(data)));
         return;
       }
 
-      // sucesso: atualiza lista localmente
       setNotasLancadas(prev => [
         ...prev,
-        { matricula, disciplina, nota: notaNum },
+        { matricula, disciplina, nota: notaNum, tipo_avaliacao: tipoAvaliacao },
       ]);
 
-      // limpa campos
       setMatricula("");
       setDisciplina("");
       setNota("");
+      setTipoAvaliacao("");
 
       alert("Nota lançada com sucesso!");
     } catch (err) {
@@ -76,86 +78,135 @@ export default function ProfessorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
       {/* HEADER */}
-      <header className="bg-purple-600 text-white py-8 px-10 shadow-lg relative">
-        <h1 className="text-4xl font-bold">Portal do Professor</h1>
-        <p className="text-purple-100 text-lg mt-1">Gerencie suas turmas e lance notas</p>
-
-        <button
-          onClick={handleLogout}
-          className="absolute top-6 right-8 bg-red-500 hover:bg-red-600 transition text-white font-semibold px-4 py-2 rounded-xl shadow-md"
-        >
-          Sair
-        </button>
-      </header>
-
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
-        {/* LANÇAR NOTAS */}
-        <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
-          <h2 className="text-2xl font-semibold text-purple-600">Lançar Notas</h2>
-
-          <div className="mt-6 space-y-4">
-            <input
-              type="text"
-              placeholder="Matrícula do aluno"
-              value={matricula}
-              onChange={(e) => setMatricula(e.target.value)}
-              className="w-full px-4 py-2 border rounded-xl placeholder-zinc-700 text-black"
-            />
-
-            <select
-              value={disciplina}
-              onChange={(e) => setDisciplina(e.target.value)}
-              className="w-full px-4 py-2 border rounded-xl text-black"
-            >
-              <option value="">Selecione uma disciplina</option>
-              <option value="Matemática">Matemática</option>
-              <option value="Português">Português</option>
-              <option value="Inglês">Inglês</option>
-              <option value="História">História</option>
-              <option value="Geografia">Geografia</option>
-              <option value="Biologia">Biologia</option>
-              <option value="Física">Física</option>
-              <option value="Química">Química</option>
-              <option value="Educação Física">Educação Física</option>
-              <option value="Artes">Artes</option>
-            </select>
-
-
-            <input
-              type="number"
-              step="0.01"
-              placeholder="Nota (0 a 10)"
-              value={nota}
-              onChange={(e) => setNota(e.target.value)}
-              className="w-full px-4 py-2 border rounded-xl placeholder-zinc-700 text-black"
-            />
-
-            <button
-              onClick={handleSubmit}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-xl shadow-md transition"
-            >
-              Lançar Nota
-            </button>
+      <header className="bg-linear-to-r from-indigo-600 to-purple-600 text-white py-10 px-10 shadow-2xl relative">
+        <div className="flex items-center space-x-4">
+          <FaBookOpen className="text-5xl" />
+          <div>
+            <h1 className="text-5xl font-extrabold tracking-wide">Portal do Professor</h1>
+            <p className="text-indigo-100 text-xl mt-2">Gerencie suas turmas e lance notas com facilidade</p>
           </div>
         </div>
 
-        {/* NOTAS LANÇADAS */}
-        <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
-          <h2 className="text-2xl font-semibold text-purple-600">Notas Lançadas</h2>
+        <button
+          onClick={handleLogout}
+          className="absolute top-6 right-8 bg-red-500 hover:bg-red-600 transition-all duration-300 text-white font-semibold px-5 py-3 rounded-full shadow-lg flex items-center space-x-2 transform hover:scale-105"
+        >
+          <FaSignOutAlt />
+          <span>Sair</span>
+        </button>
+      </header>
 
-          <ul className="mt-4 bg-purple-50 border border-purple-100 p-4 rounded-xl text-gray-700 list-disc ml-6">
-            {notasLancadas.length === 0 ? (
-              <li>Nenhuma nota lançada ainda.</li>
-            ) : (
-              notasLancadas.map((n, index) => (
-                <li key={index}>
-                  Matrícula: <b>{n.matricula}</b> — {n.disciplina}: <b>{n.nota}</b>
-                </li>
-              ))
-            )}
-          </ul>
+      <main className="max-w-5xl mx-auto px-8 py-16 space-y-12">
+        {/* LANÇAR NOTAS */}
+        <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200">
+          <h2 className="text-3xl font-bold text-indigo-700 mb-8 flex items-center space-x-3">
+            <FaClipboardCheck className="text-indigo-600" />
+            <span>Lançar Notas</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Matrícula do Aluno</label>
+              <div className="relative">
+                <FaUser className="absolute left-3 top-3 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Digite a matrícula"
+                  value={matricula}
+                  onChange={(e) => setMatricula(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 placeholder-gray-500 text-black"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Disciplina</label>
+              <select
+                value={disciplina}
+                onChange={(e) => setDisciplina(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-black"
+              >
+                <option value="">Selecione uma disciplina</option>
+                <option value="Matemática">Matemática</option>
+                <option value="Português">Português</option>
+                <option value="Inglês">Inglês</option>
+                <option value="História">História</option>
+                <option value="Geografia">Geografia</option>
+                <option value="Biologia">Biologia</option>
+                <option value="Física">Física</option>
+                <option value="Química">Química</option>
+                <option value="Educação Física">Educação Física</option>
+                <option value="Artes">Artes</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Avaliação</label>
+              <select
+                value={tipoAvaliacao}
+                onChange={(e) => setTipoAvaliacao(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-black"
+              >
+                <option value="">Selecione o tipo</option>
+                <option value="Prova 1">Prova 1</option>
+                <option value="Prova 2">Prova 2</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Atividade">Atividade</option>
+                <option value="Final">Final</option>
+                <option value="Recuperação">Recuperação</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Nota (0 a 10)</label>
+              <input
+                type="number"
+                step="0.01"
+                placeholder="Digite a nota"
+                value={nota}
+                onChange={(e) => setNota(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 placeholder-gray-500 text-black"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            className="mt-8 w-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+          >
+            <FaCheckCircle />
+            <span>Lançar Nota</span>
+          </button>
+        </div>
+
+        {/* NOTAS LANÇADAS */}
+        <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200">
+          <h2 className="text-3xl font-bold text-indigo-700 mb-8 flex items-center space-x-3">
+            <FaClipboardCheck className="text-indigo-600" />
+            <span>Notas Lançadas</span>
+          </h2>
+
+          {notasLancadas.length === 0 ? (
+            <p className="text-gray-500 text-center py-8">Nenhuma nota lançada ainda. Comece lançando uma!</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {notasLancadas.map((n, index) => (
+                <div key={index} className="bg-linear-to-r from-green-50 to-blue-50 p-6 rounded-xl shadow-md border border-green-200 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <FaUser className="text-green-600" />
+                    <span className="font-semibold text-gray-800">Matrícula: {n.matricula}</span>
+                  </div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <FaBookOpen className="text-blue-600" />
+                    <span className="text-gray-700">{n.disciplina} ({n.tipo_avaliacao})</span>
+                  </div>
+                  <div className="text-2xl font-bold text-indigo-600">Nota: {n.nota}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
     </div>
