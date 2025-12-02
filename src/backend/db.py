@@ -1,5 +1,4 @@
 import psycopg2
-import bcrypt
 
 def conectar():
     try:
@@ -24,7 +23,7 @@ def verificar_usuario(email, senha):
         cursor.execute("SELECT id, senha, tipo, nome FROM usuario WHERE email = %s", (email,))
         user = cursor.fetchone()
 
-        if user and bcrypt.checkpw(senha.encode('utf-8'), user[1].encode('utf-8')):
+        if user and senha ==user[1]:
             return {"id": user[0], "tipo": user[2], "nome": user[3]}
 
         return None

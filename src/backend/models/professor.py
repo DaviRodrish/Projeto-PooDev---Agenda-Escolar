@@ -38,9 +38,9 @@ def lancar_nota(dados: NotaEntrada):
 
         # Inserir nota no banco
         cur.execute("""
-            INSERT INTO notas (aluno_id, disciplina_id, nota, data_lancamento)
+            INSERT INTO notas (matricula, disciplina_id, nota, data_lancamento)
             VALUES (%s, %s, %s, NOW())
-        """, (aluno_id, disciplina_id, dados.nota))
+        """, (dados.matricula, disciplina_id, dados.nota))
 
         conn.commit()
 
