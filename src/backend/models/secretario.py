@@ -1,7 +1,6 @@
 from db import conectar
 from .usuario import Usuario
 
-
 class Secretario(Usuario):
     def __init__(self, nome, email, senha, idSecretario):
         super().__init__(nome, email, senha)
@@ -14,7 +13,7 @@ class Secretario(Usuario):
     def alocaSala(self, turma, sala):
         print(f"A turma {turma} foi alocada para a sala {sala}.")
 
-    def cadastrarUsuario(self,tipo,nome,email,senha):
+    def cadastrarUsuario(self, tipo, nome, email, senha):
         conn = conectar()
         cursor = conn.cursor()
         try:
@@ -55,4 +54,3 @@ class ProReitor(Usuario):
     def mostraInfos(self):
         super().mostraInfos()
         print("Cargo: Pró-Reitor")
-

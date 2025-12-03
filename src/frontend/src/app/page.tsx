@@ -2,11 +2,10 @@
 
 import { motion } from "framer-motion";
 import { FaSchool, FaHistory, FaMapMarkerAlt, FaUser } from "react-icons/fa";
-import Image from "next/image"; // Adicionando import para otimização de imagem
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 to-white font-sans text-gray-700">
+    <div className="flex flex-col min-h-screen bg-linear-to-br from-blue-50 to-white font-sans text-gray-700">
       {/* NAVBAR */}
       <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg shadow-lg border-b border-blue-200">
         <nav className="container mx-auto flex justify-between items-center px-6 py-4 flex-wrap">
@@ -16,7 +15,6 @@ export default function Home() {
           </h1>
           <div className="flex space-x-6 text-sm font-medium text-gray-600 flex-wrap">
             <a href="#sobre" className="hover:text-blue-500 transition-colors duration-300">Sobre</a>
-            <a href="#historia" className="hover:text-blue-500 transition-colors duration-300">História</a>
             <a href="#localizacao" className="hover:text-blue-500 transition-colors duration-300">Localização</a>
             <a href="/login" className="hover:text-blue-500 transition-colors duration-300 flex items-center">
               <FaUser className="mr-1" />
@@ -27,9 +25,9 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section className="flex flex-col justify-center items-center text-center min-h-screen px-6 pt-24 bg-gradient-to-r from-blue-200 via-blue-100 to-blue-50 relative overflow-hidden">
+      <section className="flex flex-col justify-center items-center text-center min-h-screen px-6 pt-24 bg-linear-to-r from-blue-200 via-blue-100 to-blue-50 relative overflow-hidden">
         <motion.h2
-          className="text-5xl sm:text-7xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800 relative z-10"
+          className="text-5xl sm:text-7xl font-extrabold mb-6 text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-blue-800 relative z-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
@@ -46,7 +44,7 @@ export default function Home() {
         </motion.p>
         <motion.a
           href="#sobre"
-          className="mt-10 px-10 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 relative z-10"
+          className="mt-10 px-10 py-4 bg-linear-to-r from-blue-500 to-blue-600 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 relative z-10"
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -91,36 +89,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HISTÓRIA */}
-      <section id="historia" className="py-24 px-6 bg-gradient-to-r from-blue-50 to-blue-100 text-center relative">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-4xl font-bold mb-10 text-blue-600 flex items-center justify-center">
-              <FaHistory className="mr-3 text-blue-500" />
-              História
-            </h3>
-            <div className="max-w-4xl mx-auto space-y-8">
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                <p className="text-lg text-gray-700"><span className="font-bold text-blue-600">2010:</span> Fundação e criação da primeira rede educacional inovadora.</p>
-              </div>
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                <p className="text-lg text-gray-700"><span className="font-bold text-blue-600">2015:</span> Expansão nacional com foco em inclusão digital e acessibilidade.</p>
-              </div>
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                <p className="text-lg text-gray-700"><span className="font-bold text-blue-600">2023:</span> Modernização completa com educação híbrida e tecnologias emergentes.</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+
 
       {/* LOCALIZAÇÃO */}
   <section id="localizacao" className="py-20 px-6 text-center bg-white">
@@ -138,7 +107,7 @@ export default function Home() {
   </section>
 
       {/* FOOTER */}
-      <footer className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-8 mt-auto">
+      <footer className="bg-linear-to-r from-blue-600 to-blue-700 text-white text-center py-8 mt-auto">
         <div className="container mx-auto">
           <p className="text-lg">© {new Date().getFullYear()} Rede Escolar. Todos os direitos reservados.</p>
           <p className="mt-2 text-sm opacity-80">Construindo o futuro da educação juntos.</p>
