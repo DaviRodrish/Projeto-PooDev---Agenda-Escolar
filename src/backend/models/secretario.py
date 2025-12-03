@@ -1,44 +1,35 @@
 from db import conectar
 from .usuario import Usuario
-import time  # Para matricula de alunos
 
 class Secretario(Usuario):
     def __init__(self, nome, email, senha, idSecretario):
         super().__init__(nome, email, senha)
         self.idSecretario = idSecretario
 
-    def mostraInfos(self):
-        super().mostraInfos()
-        print(f"ID do Secretário: {self.idSecretario}")
-
-    def alocaSala(self, turma, sala):
-        print(f"A turma {turma} foi alocada para a sala {sala}.")
-
     def cadastrarUsuario(self, tipo, nome, email, senha):
         conn = conectar()
         cursor = conn.cursor()
         try:
-            # Senha armazenada em texto plano (removido hashing com bcrypt)
-            # hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-            
-            # Verifique se o email já existe na tabela usuario
+           
             cursor.execute("SELECT id FROM usuario WHERE email = %s", (email,))
             if cursor.fetchone():
                 raise ValueError("Email já cadastrado.")
             
-            # Insira na tabela usuario e pegue o ID gerado
+        
             cursor.execute("""
                 INSERT INTO usuario (nome, email, senha, tipo)
                 VALUES (%s, %s, %s, %s)
                 RETURNING id
-            """, (nome, email, senha, tipo.lower()))  # Use 'senha' diretamente
+            """, (nome, email, senha, tipo.lower()))  
             usuario_id = cursor.fetchone()[0]
             
             if tipo.lower() == 'aluno':
-                # Gere matricula simples (timestamp)
-                matricula = str(int(time.time()))
+                # Gere matricula sequencial (ALUN001, ALUN002, etc.)
+                cursor.execute("SELECT COALESCE(MAX(CAST(SUBSTRING(matricula FROM 5) AS INTEGER)), 0) FROM alunos")
+                ultimo_num = cursor.fetchone()[0]
+                proximo_num = ultimo_num + 1
+                matricula = f"2025{proximo_num:03d}"  # Ex.: ALUN001
                 
-                # Insira na tabela alunos
                 cursor.execute("""
                     INSERT INTO alunos (id, matricula)
                     VALUES (%s, %s)

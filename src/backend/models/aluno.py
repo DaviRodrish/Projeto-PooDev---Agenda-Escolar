@@ -45,25 +45,3 @@ class Aluno(Usuario):
         conn.close()
         return alunos
 
-
-    def mostraInfos(self):
-        super().mostraInfos()
-        print(f"Matrícula: {self.matricula}")
-        print(f"Curso: {self.curso}")
-        print(f"ID do Aluno: {self.idAluno}")
-
-    def mostraBoletim(self):
-        if not self.boletim:
-            print("Boletim vazio.")
-        else:
-            print("Boletim:")
-            for disciplina, nota in self.boletim.items():
-                print(f"{disciplina}: {nota}")
-
-    def mostraGradeHoraria(self):
-        if not self.gradeHoraria:
-            print("Grade horária não cadastrada.")
-        else:
-            print("Grade Horária:")
-            for disciplina in self.gradeHoraria:
-                print(f"- {disciplina}")
