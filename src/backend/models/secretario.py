@@ -1,7 +1,6 @@
 from db import conectar
 from .usuario import Usuario
-import bcrypt
-import time  # Para gerar matricula simples
+import time  # Para matricula de alunos
 
 class Secretario(Usuario):
     def __init__(self, nome, email, senha, idSecretario):
@@ -19,8 +18,8 @@ class Secretario(Usuario):
         conn = conectar()
         cursor = conn.cursor()
         try:
-            # Hash da senha
-            hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            # Senha armazenada em texto plano (removido hashing com bcrypt)
+            # hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
             
             # Verifique se o email já existe na tabela usuario
             cursor.execute("SELECT id FROM usuario WHERE email = %s", (email,))
@@ -32,12 +31,12 @@ class Secretario(Usuario):
                 INSERT INTO usuario (nome, email, senha, tipo)
                 VALUES (%s, %s, %s, %s)
                 RETURNING id
-            """, (nome, email, hashed_senha, tipo.lower()))
-            usuario_id = cursor.fetchone()[0]  # Pega o ID retornado
+            """, (nome, email, senha, tipo.lower()))  # Use 'senha' diretamente
+            usuario_id = cursor.fetchone()[0]
             
             if tipo.lower() == 'aluno':
-                # Gere uma matricula simples (ex.: timestamp em segundos)
-                matricula = str(int(time.time()))  # Ou use um contador se preferir
+                # Gere matricula simples (timestamp)
+                matricula = str(int(time.time()))
                 
                 # Insira na tabela alunos
                 cursor.execute("""
@@ -47,8 +46,11 @@ class Secretario(Usuario):
                 print(f"Aluno '{nome}' cadastrado com sucesso! Matrícula: {matricula}")
             
             elif tipo.lower() == 'professor':
-                # Gere id_professor (aqui, usando o mesmo usuario_id; ajuste se precisar)
-                id_professor = usuario_id  # Ou gere algo diferente, ex.: cursor.execute("SELECT nextval('professor_seq')")
+                # Gere id_professor sequencial (PROF001, PROF002, etc.)
+                cursor.execute("SELECT COALESCE(MAX(CAST(SUBSTRING(id_professor FROM 5) AS INTEGER)), 0) FROM professores")
+                ultimo_num = cursor.fetchone()[0]
+                proximo_num = ultimo_num + 1
+                id_professor = f"PROF{proximo_num:03d}"  # Ex.: PROF001
                 
                 # Insira na tabela professores
                 cursor.execute("""
